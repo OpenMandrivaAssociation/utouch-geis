@@ -1,0 +1,21 @@
+diff -urN utouch-geis-2.2.0.old/configure.ac utouch-geis-2.2.0/configure.ac
+--- utouch-geis-2.2.0.old/configure.ac	2011-10-18 23:28:35.000000000 +0100
++++ utouch-geis-2.2.0/configure.ac	2011-10-20 20:52:02.384849338 +0100
+@@ -27,7 +27,7 @@
+ AC_CONFIG_HEADERS([geis_config.h])
+ AC_CONFIG_AUX_DIR([config.aux])
+ AC_CONFIG_MACRO_DIR([m4])
+-AM_INIT_AUTOMAKE([1.11 gnu -Wall color-tests])
++AM_INIT_AUTOMAKE([1.11 gnu color-tests])
+ AM_SILENT_RULES([yes])
+ 
+ # Checks for programs.
+@@ -81,7 +81,7 @@
+ AC_DEFINE([GEIS_UNUSED],[__attribute__((unused))],[symbol is unused])
+ 
+ AC_SUBST(AM_CFLAGS,
+-         "-Wall -Wextra -Werror -pedantic -std=iso9899:1999 -D_GNU_SOURCE=1")
++         "-Wall -Wextra -pedantic -std=iso9899:1999 -D_GNU_SOURCE=1")
+ 
+ # Check for TDD tools
+ PKG_CHECK_MODULES([CHECK], [check >= 0.9.8],
