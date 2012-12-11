@@ -5,7 +5,7 @@
  
 Name:           utouch-geis
 Version:        2.2.1
-Release:        1
+Release:        2
 License:        GPLv2,LGPLv3
 Summary:        Gesture engine interface and support
 Url:            http://launchpad.net/utouch-geis
@@ -57,41 +57,35 @@ recognition mechanism.
 %patch0 -p1
  
 %build
+autoreconf -fi
 %configure2_5x \
   --disable-static
 %make
  
 %install
 %makeinstall_std
-find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
- 
-%clean
-rm -rf %{buildroot}
  
  
 %files
-%defattr(-,root,root)
 %doc ChangeLog README COPYING
-%{_bindir}/*
+%{_bindir}/geis-server
+%{_bindir}/geistest
+%{_bindir}/geisview
 %{_mandir}/man1/*
 %{_datadir}/applications/*.desktop
 %{_datadir}/geisview/*.ui
 %{_datadir}/pixmaps/*.xpm
  
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
 %files -n python-geis
-%defattr(-,root,root)
 %{_bindir}/pygeis
 %{py_puresitedir}/geis*
 %{py_platsitedir}/*.so
  
 %files -n %{develname}
-%defattr(-,root,root)
 %{_includedir}/geis/
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*.pc
-
 
