@@ -1,0 +1,60 @@
+diff -up geis-2.2.17/include/geis/geis.h.gcc7 geis-2.2.17/include/geis/geis.h
+--- geis-2.2.17/include/geis/geis.h.gcc7	2017-09-30 15:47:42.045473523 +0200
++++ geis-2.2.17/include/geis/geis.h	2017-09-30 15:48:05.937300161 +0200
+@@ -911,7 +911,7 @@ typedef unsigned int GeisGestureType;
+ typedef unsigned int GeisGestureId;
+ 
+ /** Selects ALL input devices. */
+-#define GEIS_ALL_GESTURES ((GeisGestureType)0)
++#define GEIS_ALL_GESTURES ((char const **)NULL)
+ 
+ #define GEIS_NO_GESTURE_ID ((GeisGestureId)0)
+ 
+@@ -1004,7 +1004,7 @@ GEIS_API GeisStatus geis_subscribe(GeisI
+  * @param[in] gesture_list      a null-terminated list of gesture types
+  */
+ GEIS_API GeisStatus geis_unsubscribe(GeisInstance     geis_instance,
+-                                     GeisGestureType *gesture_list);
++                                     char const **    gesture_list);
+ 
+ /* @} */
+ 
+diff -up geis-2.2.17/libgeis/geis_subscription.c.gcc7 geis-2.2.17/libgeis/geis_subscription.c
+--- geis-2.2.17/libgeis/geis_subscription.c.gcc7	2013-05-29 13:24:59.000000000 +0200
++++ geis-2.2.17/libgeis/geis_subscription.c	2017-09-30 15:37:34.409882469 +0200
+@@ -238,8 +238,10 @@ geis_subscription_bag_empty(GeisSubBag b
+   for (i = 0; i < bag->sub_store_size; ++i)
+   {
+     if (bag->sub_store[i])
++    {
+       _subscription_unref(bag->sub_store[i]);
+       bag->sub_store[i] = NULL;
++    }
+   }
+ }
+ 
+diff -up geis-2.2.17/libgeis/geis_v1.c.gcc7 geis-2.2.17/libgeis/geis_v1.c
+--- geis-2.2.17/libgeis/geis_v1.c.gcc7	2013-05-29 13:24:59.000000000 +0200
++++ geis-2.2.17/libgeis/geis_v1.c	2017-09-30 15:47:03.289754802 +0200
+@@ -754,7 +754,7 @@ geis_subscribe(GeisInstance         inst
+  */
+ GeisStatus
+ geis_unsubscribe(GeisInstance     instance,
+-                 GeisGestureType *gesture_list)
++                 char const **    gesture_list)
+ {
+   GeisStatus status = GEIS_STATUS_NOT_SUPPORTED;
+   if (gesture_list == GEIS_ALL_GESTURES)
+@@ -763,11 +763,10 @@ geis_unsubscribe(GeisInstance     instan
+   }
+   else
+   {
+-    const char **gesture_name_list = (const char **)gesture_list;
+     const char **g;
+ 
+     status = geis_subscription_deactivate(instance->subscription);
+-    for (g = gesture_name_list; *g; ++g)
++    for (g = gesture_list; *g; ++g)
+     {
+       GeisFilter filter;
+ 
