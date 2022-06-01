@@ -23,6 +23,8 @@ BuildRequires:  pkgconfig(xorg-server)
 BuildRequires:  pkgconfig(python)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xi)
+BuildRequires:  pkgconfig(x11)
+BuildRequires:  pkgconfig(xext)
  
 %description
 GEIS is a library for applications and toolkit programmers which provides a
@@ -63,9 +65,10 @@ recognition mechanism.
 export CC=gcc
 export CXX=g++
 autoreconf -fi
+automake --add-missing
 %configure \
   --disable-static
-%make_build
+%make_build LIBS+="-lframe"
  
 %install
 %make_install
