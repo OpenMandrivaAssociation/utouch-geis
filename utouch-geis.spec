@@ -25,6 +25,8 @@ BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xi)
 BuildRequires:  pkgconfig(x11)
 BuildRequires:  pkgconfig(xext)
+
+Provides:   geis
  
 %description
 GEIS is a library for applications and toolkit programmers which provides a
@@ -76,6 +78,8 @@ automake --add-missing
  
 %files
 %doc ChangeLog README COPYING
+%doc %{_datadir}/doc/geis/Doxyfile 
+%doc %{_datadir}/doc/geis/geisspec*
 #{_bindir}/geis-server
 %{_bindir}/geistest
 %{_bindir}/geisview
