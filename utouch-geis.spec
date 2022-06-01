@@ -20,7 +20,6 @@ BuildRequires:  pkgconfig(xorg-server)
 BuildRequires:  pkgconfig(python)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xi)
-BuildRequires:  python-pyxml
  
 %description
 GEIS is a library for applications and toolkit programmers which provides a
