@@ -1,4 +1,5 @@
 #define Werror_cflags %nil
+%define _disable_ld_no_undefined 1
 %define major 1
 %define libname %mklibname  %{name} %{major}
 %define develname   %mklibname  %{name} -d
