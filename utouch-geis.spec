@@ -1,24 +1,32 @@
 #define Werror_cflags %nil
+%define _disable_ld_no_undefined 1
 %define major 1
 %define libname %mklibname  %{name} %{major}
 %define develname   %mklibname  %{name} -d
+%define oname geis
  
 Name:           utouch-geis
-Version:        2.2.1
-Release:        2
+Version:        2.2.17
+Release:        1
 License:        GPLv2,LGPLv3
 Summary:        Gesture engine interface and support
-Url:            http://launchpad.net/utouch-geis
+Url:            http://launchpad.net/geis
 Group:          System/Libraries
-Source0:		%{name}-%{version}.tar.gz
-Patch0:			utouch-geis-2.2.0-remove-Werror.patch
+Source0:        https://launchpad.net/geis/trunk/%{version}/+download/%{oname}-%{version}.tar.xz
+Patch1:		geis-2.2.14-configureac.patch
+Patch2:		geis-2.2.17-gcc7.patch
+
 BuildRequires:  pkgconfig(dbus-1)
-BuildRequires:  pkgconfig(utouch-grail)
-BuildRequires:  pkgconfig(utouch-frame)
+BuildRequires:  pkgconfig(grail)
+BuildRequires:  pkgconfig(frame)
 BuildRequires:  pkgconfig(xorg-server)
 BuildRequires:  pkgconfig(python)
+BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xi)
-BuildRequires:  python-pyxml
+BuildRequires:  pkgconfig(x11)
+BuildRequires:  pkgconfig(xext)
+
+Provides:   geis
  
 %description
 GEIS is a library for applications and toolkit programmers which provides a
@@ -46,6 +54,7 @@ Summary:        Development files for the GEIS interface implementation
 Group:          Development/C
 Requires:       %{libname} = %{version}-%{release}
 Provides:       %{name}-devel = %{version}-%{release}
+Provides:       geis-devel = %{version}-%{release}
  
 %description -n %{develname}
 GEIS is a library for applications and toolkit programmers which provides a
@@ -53,22 +62,26 @@ consistent platform independent interface for any system-wide input gesture
 recognition mechanism.
  
 %prep
-%setup -q
-%patch0 -p1
+%autosetup -n %{oname}-%{version} -p1
  
 %build
+export CC=gcc
+export CXX=g++
 autoreconf -fi
-%configure2_5x \
+automake --add-missing
+%configure \
   --disable-static
-%make
+%make_build LIBS+="-lframe"
  
 %install
-%makeinstall_std
+%make_install
  
  
 %files
 %doc ChangeLog README COPYING
-%{_bindir}/geis-server
+%doc %{_datadir}/doc/geis/Doxyfile 
+%doc %{_datadir}/doc/geis/geisspec*
+#{_bindir}/geis-server
 %{_bindir}/geistest
 %{_bindir}/geisview
 %{_mandir}/man1/*
