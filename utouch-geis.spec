@@ -12,7 +12,7 @@ Summary:        Gesture engine interface and support
 Url:            http://launchpad.net/geis
 Group:          System/Libraries
 Source0:        https://launchpad.net/geis/trunk/%{version}/+download/%{oname}-%{version}.tar.xz
-Patch1:		%{name}-2.2.14-configureac.patch
+Patch1:		geis-2.2.14-configureac.patch
 Patch2:		geis-2.2.17-gcc7.patch
 
 BuildRequires:  pkgconfig(dbus-1)
