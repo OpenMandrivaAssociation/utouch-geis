@@ -1,0 +1,14 @@
+--- geis-2.2.14/configure.ac.orig	2012-11-13 14:50:32.000000000 +0100
++++ geis-2.2.14/configure.ac	2013-01-07 00:00:40.555376001 +0100
+@@ -41,8 +41,10 @@
+ # Checks for libraries.
+ PKG_CHECK_MODULES([DBUS], [dbus-1 >= 1.2.16], ,
+ 		  AC_MSG_ERROR([D-Bus development libraries not found]))
+-PKG_CHECK_MODULES([GRAIL], [grail >= 3.0.8 frame >= 2.2], ,
++PKG_CHECK_MODULES([GRAIL], [grail >= 3.0.8], ,
+ 		  AC_MSG_ERROR([Grail development libraries not found]))
++PKG_CHECK_MODULES([FRAME], [frame >= 2.2], ,
++		  AC_MSG_ERROR([Frame development libraries not found]))
+ PKG_CHECK_MODULES([XCB], [xcb >= 1.6], ,
+ 		  AC_MSG_ERROR([XCB development libraries not found]))
+ PKG_CHECK_MODULES([XI2], [x11 xext xi >= 1.3], ,
