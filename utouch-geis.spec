@@ -2,21 +2,23 @@
 %define major 1
 %define libname %mklibname  %{name} %{major}
 %define develname   %mklibname  %{name} -d
+%define oname geis
  
 Name:           utouch-geis
-Version:        2.2.1
-Release:        2
+Version:        2.2.17
+Release:        1
 License:        GPLv2,LGPLv3
 Summary:        Gesture engine interface and support
-Url:            http://launchpad.net/utouch-geis
+Url:            http://launchpad.net/geis
 Group:          System/Libraries
-Source0:		%{name}-%{version}.tar.gz
-Patch0:			utouch-geis-2.2.0-remove-Werror.patch
+Source0:        https://launchpad.net/geis/trunk/%{version}/+download/%{oname}-%{version}.tar.xz
+
 BuildRequires:  pkgconfig(dbus-1)
-BuildRequires:  pkgconfig(utouch-grail)
-BuildRequires:  pkgconfig(utouch-frame)
+BuildRequires:  pkgconfig(grail)
+BuildRequires:  pkgconfig(frame)
 BuildRequires:  pkgconfig(xorg-server)
 BuildRequires:  pkgconfig(python)
+BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xi)
 BuildRequires:  python-pyxml
  
@@ -53,17 +55,16 @@ consistent platform independent interface for any system-wide input gesture
 recognition mechanism.
  
 %prep
-%setup -q
-%patch0 -p1
+%autosetup -n %{oname}-%{version}
  
 %build
 autoreconf -fi
-%configure2_5x \
+%configure \
   --disable-static
-%make
+%make_build
  
 %install
-%makeinstall_std
+%make_install
  
  
 %files
