@@ -54,6 +54,7 @@ Summary:        Development files for the GEIS interface implementation
 Group:          Development/C
 Requires:       %{libname} = %{version}-%{release}
 Provides:       %{name}-devel = %{version}-%{release}
+Provides:       geis-devel = %{version}-%{release}
  
 %description -n %{develname}
 GEIS is a library for applications and toolkit programmers which provides a
