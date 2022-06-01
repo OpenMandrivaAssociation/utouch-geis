@@ -59,6 +59,8 @@ recognition mechanism.
 %autosetup -n %{oname}-%{version} -p1
  
 %build
+export CC=gcc
+export CXX=g++
 autoreconf -fi
 %configure \
   --disable-static
