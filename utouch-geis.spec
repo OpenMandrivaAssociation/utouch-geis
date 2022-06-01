@@ -76,7 +76,7 @@ automake --add-missing
  
 %files
 %doc ChangeLog README COPYING
-%{_bindir}/geis-server
+#{_bindir}/geis-server
 %{_bindir}/geistest
 %{_bindir}/geisview
 %{_mandir}/man1/*
