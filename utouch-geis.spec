@@ -10,7 +10,7 @@ Version:        2.2.17
 Release:        1
 License:        GPLv2,LGPLv3
 Summary:        Gesture engine interface and support
-Url:            http://launchpad.net/geis
+Url:            https://launchpad.net/geis
 Group:          System/Libraries
 Source0:        https://launchpad.net/geis/trunk/%{version}/+download/%{oname}-%{version}.tar.xz
 Patch1:		geis-2.2.14-configureac.patch
