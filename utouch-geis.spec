@@ -16,6 +16,11 @@ Source0:        https://launchpad.net/geis/trunk/%{version}/+download/%{oname}-%
 Patch1:		geis-2.2.14-configureac.patch
 Patch2:		geis-2.2.17-gcc7.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(grail)
 BuildRequires:  pkgconfig(frame)
